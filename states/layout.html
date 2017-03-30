@@ -1,0 +1,45 @@
+<div class="md-padding" layout="column">
+    <md-content layout-align="center center" layout="row" style="position: absolute; top: 5px; left: 10px; font-size:24px;">
+        <h1 style="padding: 0 20px 0 20px; margin-top:0px;margin-bottom:10px;"> {{ timer.time | date:'mm:ss'}}</h1>
+        <md-button ng-click="timerStart()" style="margin-top:0px; margin-bottom:0px;">
+            <md-icon>play_arrow</md-icon>
+        </md-button>
+        <md-button ng-click="timerStop()"  style="margin-top:0px; margin-bottom:0px;">
+            <md-icon>stop</md-icon>
+        </md-button>
+    </md-content>
+    <md-content layout="row" flex>
+        <md-content flex="40" md-whiteframe="1" class="md-padding">
+            <md-toolbar layout="row" class="md-hue-3">
+                <div class="md-toolbar-tools">
+                    <span>Quest List</span>
+                </div>
+            </md-toolbar>
+            <md-list class="md-dense" flex>
+                <md-list-item class="md-3-line" ng-repeat="puzzle in puzzles">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ puzzle.name }}</h3>
+                        <h4>{{ puzzle.description }}</h4>
+                        <h4>{{ puzzle.time }}</h4>
+                        <md-checkbox class="md-secondary" ng-disabled="puzzle.status == 'COMPLETE'" aria-label="Puzzle Status"></md-checkbox>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+        <md-content flex="60" md-whiteframe="2" class="md-padding">
+            <md-toolbar layout="row" class="md-hue-3">
+                <div class="md-toolbar-tools">
+                    <span>Help List</span>
+                </div>
+            </md-toolbar>
+            <md-list class="md-dense" flex>
+                <md-list-item class="md-3-line" ng-repeat="puzzle in puzzles" ng-show="puzzle.status== 'ACTIVE'">
+
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ puzzle.hint }}</h3>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-content>
+</div>
