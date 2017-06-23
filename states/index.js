@@ -2,13 +2,13 @@
 //var myApp = angular.module('escape:main', [])
 
 angular.module('escape')
-  .config(['$stateProvider', function ($stateProvider) {
+  .config(['$stateProvider', function ($stateProvider, ngAudio) {
 
     $stateProvider.state('quest', {
       url: '/quest',
       templateUrl: '/states/layout.html',
-      controller: ['$rootScope', '$scope', '$interval',
-        function ($rootScope, $scope, $interval) {
+      controller: ['$rootScope', '$scope', '$interval', 'ngAudio',
+        function ($rootScope, $scope, $interval, ngAudio) {
           $scope.layout = 'Quest';
           $scope.puzzles = [
             { name: 'puzzle 1', description: 'Puzzle 1 long description', status: 'COMPLETE', type: 'LOCK_CONTROLLED', hint: ['This is hint 1', 'This is hint 2'] },
@@ -53,6 +53,13 @@ angular.module('escape')
           }
           function isTimerRunning() {
             return timeController.timerProcess;
+          }
+
+          timeController.playHint = function(hintAudio) {
+            console.log('Playing sound', hintAudio);
+            // var sound = ngAudio.load('audio/song2.mp3');
+            // sound.play();
+            ngAudio.play (hintAudio);
           }
         }
 

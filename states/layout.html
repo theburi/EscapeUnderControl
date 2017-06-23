@@ -4,7 +4,7 @@
         <md-button ng-click="timerStart()" style="margin-top:0px; margin-bottom:0px;">
             <md-icon>play_arrow</md-icon>
         </md-button>
-        <md-button ng-click="timerStop()"  style="margin-top:0px; margin-bottom:0px;">
+        <md-button ng-click="timerStop()" style="margin-top:0px; margin-bottom:0px;">
             <md-icon>stop</md-icon>
         </md-button>
     </md-content>
@@ -40,6 +40,18 @@
                     </div>
                 </md-list-item>
             </md-list>
+
+            <div class="container-fluid">
+
+                <div>
+                    <md-button ng-click="playHint('audio/song1.mp3')">Hint 1</md-button>
+                </div>
+                <div>
+                    <md-button ng-click="playHint('audio/song2.mp3')">Hint 2</md-button>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+            <!--/.container-fluid -->
         </md-content>
     </md-content>
 </div>

@@ -3,7 +3,8 @@
 
 angular.module('escape', [
   'ui.router',
-  'ngMaterial'
+  'ngMaterial',
+  'ngAudio'
 ])
 
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
