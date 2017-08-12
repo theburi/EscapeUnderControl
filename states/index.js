@@ -15,8 +15,10 @@ angular.module('escape')
             { name: 'puzzle 2', description: 'puzzle 2', status: 'ACTIVE', type: 'LOCK', hint: ['This is hint 1', 'This is hint 2'] },
             { name: 'puzzle 3', description: 'puzzle 2', status: 'UNAVAILABLE', type: 'ARDUINO_CONTROLLED' },
             { name: 'puzzle 4', description: 'puzzle 2', status: 'UNAVAILABLE', type: 'LOCK_CONTROLLED', hint: ['This is hint 1', 'This is hint 2'] }];
-          console.log('quest');
-
+          $scope.hints = [
+            { filename: 'audio/Introduction snake voice.wav', name: 'Introduction snake voice', volume: 1, repeat: false}
+          ]
+            console.log('quest');
           var timeController = $scope;
 
           timeController.timer = { time: (new Date()).setHours(0, 0, 0, 0), startTime: "", interval: 1000 };
@@ -28,7 +30,7 @@ angular.module('escape')
               // Register the interval and hold on to the interval promise
               timeController.timerProcess = $interval(TimerTick, timeController.timer.interval);
               // Reset the time to 0
-              timeController.timerReset();
+              timeController.timerReset();              
             }
           }
 

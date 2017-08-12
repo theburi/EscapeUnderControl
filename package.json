@@ -1,0 +1,12 @@
+{
+    "name": "artfit",
+    "version": "0.0.0",
+    "description": "ArtFit Client Application",
+    "main": "index.js",
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "latest",
+        "body-parser": "latest"
+    }
+}

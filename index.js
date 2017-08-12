@@ -13,7 +13,7 @@ angular.module('escape', [
 
     $stateProvider.state('main', {
       url: '/main',
-      templateUrl: 'home.html',
+      templateUrl: 'assets/home.html',
       controller: ['$rootScope', '$scope',
         function ($rootScope, $scope) {
           console.log('main')

@@ -32,23 +32,14 @@
                     <span>Help List</span>
                 </div>
             </md-toolbar>
-            <md-list class="md-dense" flex>
-                <md-list-item class="md-3-line" ng-repeat="puzzle in puzzles" ng-show="puzzle.status== 'ACTIVE'">
-
-                    <div class="md-list-item-text" layout="column">
-                        <h3>{{ puzzle.hint }}</h3>
-                    </div>
-                </md-list-item>
-            </md-list>
+ 
 
             <div class="container-fluid">
 
-                <div>
-                    <md-button ng-click="playHint('audio/song1.mp3')">Hint 1</md-button>
+                <div ng-repeat="hint in hints">
+                    <md-button class="md-raised" ng-click="playHint( hint.filename )" >Play {{ hint.name }}</md-button>
                 </div>
-                <div>
-                    <md-button ng-click="playHint('audio/song2.mp3')">Hint 2</md-button>
-                </div>
+                
                 <!--/.nav-collapse -->
             </div>
             <!--/.container-fluid -->
