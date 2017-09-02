@@ -17,6 +17,9 @@ angular.module('escape')
             { name: 'puzzle 4', description: 'puzzle 2', status: 'UNAVAILABLE', type: 'LOCK_CONTROLLED', hint: ['This is hint 1', 'This is hint 2'] }];
           $scope.hints = [
             { filename: 'audio/Introduction snake voice.wav', name: 'Introduction snake voice', volume: 1, repeat: false},
+            { filename: 'audio/EndOfGame.mp3', name: 'End of Game FULL', volume: 1, repeat: false},
+            { filename: 'audio/EndOfGame1.mp3', name: 'End of Game - TaDa', volume: 1, repeat: false},
+            { filename: 'audio/EndOfGame2.mp3', name: 'End of Game - claping', volume: 1, repeat: false},
             { filename: 'audio/Ghost effect.wav', name: 'Ghost effect', volume: 1, repeat: false},
             { filename: 'audio/Tomb door open.wav', name: 'Tomb door open', volume: 1, repeat: false}
           ]
