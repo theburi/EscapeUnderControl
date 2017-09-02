@@ -16,7 +16,9 @@ angular.module('escape')
             { name: 'puzzle 3', description: 'puzzle 2', status: 'UNAVAILABLE', type: 'ARDUINO_CONTROLLED' },
             { name: 'puzzle 4', description: 'puzzle 2', status: 'UNAVAILABLE', type: 'LOCK_CONTROLLED', hint: ['This is hint 1', 'This is hint 2'] }];
           $scope.hints = [
-            { filename: 'audio/Introduction snake voice.wav', name: 'Introduction snake voice', volume: 1, repeat: false}
+            { filename: 'audio/Introduction snake voice.wav', name: 'Introduction snake voice', volume: 1, repeat: false},
+            { filename: 'audio/Ghost effect.wav', name: 'Ghost effect', volume: 1, repeat: false},
+            { filename: 'audio/Tomb door open.wav', name: 'Tomb door open', volume: 1, repeat: false}
           ]
             console.log('quest');
           var timeController = $scope;
