@@ -4,17 +4,13 @@
 angular.module('escape')
   .config(['$stateProvider', function ($stateProvider, ngAudio) {
 
-    $stateProvider.state('quest', {
-      url: '/quest',
+    $stateProvider.state('jungle', {
+      url: '/jungle',
       templateUrl: '/states/layout.html',
       controller: ['$rootScope', '$scope', '$interval', 'ngAudio',
         function ($rootScope, $scope, $interval, ngAudio) {
           $scope.layout = 'Quest';
-          $scope.puzzles = [
-            { name: 'puzzle 1', description: 'Puzzle 1 long description', status: 'COMPLETE', type: 'LOCK_CONTROLLED', hint: ['This is hint 1', 'This is hint 2'] },
-            { name: 'puzzle 2', description: 'puzzle 2', status: 'ACTIVE', type: 'LOCK', hint: ['This is hint 1', 'This is hint 2'] },
-            { name: 'puzzle 3', description: 'puzzle 2', status: 'UNAVAILABLE', type: 'ARDUINO_CONTROLLED' },
-            { name: 'puzzle 4', description: 'puzzle 2', status: 'UNAVAILABLE', type: 'LOCK_CONTROLLED', hint: ['This is hint 1', 'This is hint 2'] }];
+          $scope.puzzles = [];
           $scope.hints = [
             { filename: 'audio/Introduction snake voice.wav', name: 'Introduction snake voice', volume: 1, repeat: false},
             { filename: 'audio/EndOfGame.mp3', name: 'End of Game FULL', volume: 1, repeat: false},

@@ -24,25 +24,4 @@ angular.module('escape', [
 
 
 
-// app.run(['$rootScope', '$state', 
-//   function ($rootScope, $state) {
-//     // Expose state and stateParams to rootScope
-//     $rootScope.$state = $state;
-//     $rootScope.$on('$stateChangeSuccess', function (ev, $state, $stateParams) {
-//       $rootScope.$stateParams = $stateParams;
-//     });
-
-//     // Support state redirection
-//     $rootScope.$on('$stateChangeStart', function (ev, toState, toParams) {
-//       if (toState.redirectTo) {
-//         ev.preventDefault();
-//         ev.noUpdate = true;
-//         $state.go(toState.redirectTo, toParams);
-//       }
-//     });
-
-//   }
-// ]);
-
-
 

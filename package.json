@@ -1,12 +1,18 @@
 {
     "name": "artfit",
-    "version": "0.0.0",
+    "version": "0.0.2",
     "description": "ArtFit Client Application",
     "main": "index.js",
     "author": "",
     "license": "ISC",
     "dependencies": {
         "express": "latest",
-        "body-parser": "latest"
+        "body-parser": "latest",
+        "angular": "latest",
+        "angular-animate": "latest",
+        "angular-messages": "latest",
+        "angular-aria": "latest",
+        "angular-ui-router": "latest",
+        "angular-material": "latest"
     }
 }

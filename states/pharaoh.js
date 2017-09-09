@@ -4,7 +4,7 @@
 angular.module('escape')
 .config(['$stateProvider', function ($stateProvider, ngAudio) {
 
-  $stateProvider.state('quest', {
+  $stateProvider.state('pharaoh', {
     url: '/pharaoh',
     templateUrl: '/states/layout.html',
     controller: ['$rootScope', '$scope', '$interval', 'ngAudio',

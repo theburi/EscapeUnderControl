@@ -16,23 +16,22 @@
 <body layout="column">
   <md-content layout="column">
     <div layout="row" role="main" flex layout-align="center center">
-      <md-button ui-sref="quest" class="md-raised md-primary">Jungle</md-button>
-      <md-button ui-sref="quest" class="md-raised md-primary">Pharaoh</md-button>
+      <md-button ui-sref="jungle" class="md-raised md-primary">Jungle</md-button>
+      <md-button ui-sref="pharaoh" class="md-raised md-primary">Pharaoh</md-button>
     </div>
     <div layout-fill ui-view flex></div>
   </md-content>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+  <script src="/node_modules/angular/angular.min.js"></script>
+  <script src="/node_modules/angular-animate/angular-animate.min.js"></script>
+  <script src="/node_modules/angular-aria/angular-aria.min.js"></script>
+  <script src="/node_modules/angular-messages/angular-messages.min.js"></script>
+  <script src="/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/node_modules/angular-material/angular-material.min.js"></script>
   <script src="lib/angular.audio.js"></script>
   <script src="index.js"></script>
-  <script src="states/index.js"></script>
-  
+  <script src="states/jungle.js"></script>
+  <script src="states/pharaoh.js"></script>
 </body>
 
 </html>
