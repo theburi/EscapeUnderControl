@@ -12,14 +12,20 @@ angular.module('escape')
           $scope.layout = 'Quest';
           $scope.puzzles = [];
           $scope.hints = [
-            { filename: 'audio/Introduction snake voice.wav', name: 'Introduction snake voice', volume: 1, repeat: false},
-            { filename: 'audio/EndOfGame.mp3', name: 'End of Game FULL', volume: 1, repeat: false},
-            { filename: 'audio/EndOfGame1.mp3', name: 'End of Game - TaDa', volume: 1, repeat: false},
-            { filename: 'audio/EndOfGame2.mp3', name: 'End of Game - claping', volume: 1, repeat: false},
-            { filename: 'audio/Ghost effect.wav', name: 'Ghost effect', volume: 1, repeat: false},
-            { filename: 'audio/Tomb door open.wav', name: 'Tomb door open', volume: 1, repeat: false}
+            { filename: 'audio/jungle/Introduction snake voice.wav', name: 'Introduction snake voice', volume: 1, repeat: false},
+            { filename: 'audio/jungle/Round 1.wav', name: 'Round 1', volume: 1, repeat: false},
+            { filename: 'audio/jungle/Round 2.wav', name: 'Round 2', volume: 1, repeat: false},
+            { filename: 'audio/jungle/Round 3.wav', name: 'Round 3', volume: 1, repeat: false},
+            { filename: 'audio/jungle/Completed the game.wav', name: 'Completed the game', volume: 1, repeat: false},
+            { filename: 'audio/jungle/Touch animal footprints.wav', name: 'Touch animal footprints', volume: 1, repeat: false},
+            { filename: 'audio/jungle/45 min remaining.wav', name: '45 min remaining', volume: 1, repeat: false},
+            { filename: 'audio/jungle/30 min remaining.wav', name: '30 min remaining', volume: 1, repeat: false},
+            { filename: 'audio/jungle/15 min remaining.wav', name: '15 min remaining', volume: 1, repeat: false},
+            { filename: 'audio/jungle/10 min remaining.wav', name: '10 min remaining', volume: 1, repeat: false},
+            { filename: 'audio/jungle/5 min remaining.wav', name: '5 min remaining', volume: 1, repeat: false},
+            { filename: 'audio/jungle/2 min remaining.wav', name: '2 min remaining', volume: 1, repeat: false},
+            { filename: 'audio/jungle/1 min remaining.wav', name: '1 min remaining', volume: 1, repeat: false}
           ]
-            console.log('quest');
           var timeController = $scope;
 
           timeController.timer = { time: (new Date()).setHours(0, 0, 0, 0), startTime: "", interval: 1000 };
@@ -60,9 +66,10 @@ angular.module('escape')
 
           timeController.playHint = function(hintAudio) {
             console.log('Playing sound', hintAudio);
-            // var sound = ngAudio.load('audio/song2.mp3');
-            // sound.play();
-            ngAudio.play (hintAudio);
+            if ($scope.audio)  $scope.audio.stop();
+            $scope.audio = ngAudio.load(hintAudio);
+            $scope.audio.play();
+            // ngAudio.play (hintAudio);
           }
         }
 

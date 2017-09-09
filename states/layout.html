@@ -30,6 +30,7 @@
             <md-toolbar layout="row" class="md-hue-3">
                 <div class="md-toolbar-tools">
                     <span>AUDIO List</span>
+                    <md-progress-linear md-mode="determinate" value="{{audio.progress*100}}"></md-progress-linear>                    
                 </div>
             </md-toolbar>
  
@@ -37,7 +38,7 @@
             <div class="container-fluid">
 
                 <div ng-repeat="hint in hints">
-                    <md-button class="md-raised" ng-click="playHint( hint.filename )" >Play {{ hint.name }}</md-button>
+                    <md-button class="md-raised" ng-click="playHint( hint.filename )" >Play: {{ hint.name }}</md-button>
                 </div>
                 
                 <!--/.nav-collapse -->

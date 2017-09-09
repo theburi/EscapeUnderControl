@@ -13,6 +13,7 @@
         "angular-messages": "latest",
         "angular-aria": "latest",
         "angular-ui-router": "latest",
-        "angular-material": "latest"
+        "angular-material": "latest",
+        "angular-audio":"latest"
     }
 }

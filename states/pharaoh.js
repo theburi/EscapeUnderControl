@@ -10,14 +10,22 @@ angular.module('escape')
     controller: ['$rootScope', '$scope', '$interval', 'ngAudio',
       function ($rootScope, $scope, $interval, ngAudio) {
         $scope.layout = 'Quest';
-        $scope.puzzles = [
-          { name: 'puzzle 1', description: 'Puzzle 1 long description', status: 'COMPLETE', type: 'LOCK_CONTROLLED', hint: ['This is hint 1', 'This is hint 2'] },
-          { name: 'puzzle 2', description: 'puzzle 2', status: 'ACTIVE', type: 'LOCK', hint: ['This is hint 1', 'This is hint 2'] },
-          { name: 'puzzle 3', description: 'puzzle 2', status: 'UNAVAILABLE', type: 'ARDUINO_CONTROLLED' },
-          { name: 'puzzle 4', description: 'puzzle 2', status: 'UNAVAILABLE', type: 'LOCK_CONTROLLED', hint: ['This is hint 1', 'This is hint 2'] }];
+        $scope.puzzles = [];
         $scope.hints = [
-          { filename: 'audio/Ghost effect.wav', name: 'Ghost effect', volume: 1, repeat: false},
-          { filename: 'audio/Tomb door open.wav', name: 'Tomb door open', volume: 1, repeat: false}
+          { filename: 'audio/pharaoh/My name is Hafra.wav', name: 'My name is Hafra', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/Dark Laugh 2.wav', name: 'Dark Laugh 2', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/Ghost effect.wav', name: 'Ghost effect', volume: 1, repeat: false},
+          // { filename: 'audio/pharaoh/Round 3.wav', name: 'Round 3', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/Tomb door open.wav', name: 'Tomb door open', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/45 min remaining.wav', name: '45 min remaining', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/30 min remaining.wav', name: '30 min remaining', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/15 min remaining.wav', name: '15 min remaining', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/2 min remaining.wav', name: '2 min remaining', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/1 min remaining.wav', name: '1 min remaining', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/Count down.wav', name: 'Count down', volume: 1, repeat: false},
+          // { filename: 'audio/pharaoh/Completed the game.wav', name: 'Completed the game', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/Out of time.wav', name: 'Out of time', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/Congratulations at the end.wav', name: 'Congratulations at the end', volume: 1, repeat: false}
         ]
           console.log('quest');
         var timeController = $scope;
@@ -60,9 +68,10 @@ angular.module('escape')
 
         timeController.playHint = function(hintAudio) {
           console.log('Playing sound', hintAudio);
-          // var sound = ngAudio.load('audio/song2.mp3');
-          // sound.play();
-          ngAudio.play (hintAudio);
+          if ($scope.audio)  $scope.audio.stop();
+          $scope.audio = ngAudio.load(hintAudio);
+          $scope.audio.play();
+          // ngAudio.play (hintAudio);
         }
       }
 
