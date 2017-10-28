@@ -72,7 +72,7 @@ angular.module('escape')
           console.log('Playing sound', hintAudio);
           if ($scope.audio)  $scope.audio.stop();
           $scope.audio = ngAudio.load(hintAudio.filename);
-          $scope.audio.volume(hintAudio.volume);
+          $scope.audio.volume = hintAudio.volume;
           $scope.audio.play();
           // ngAudio.play (hintAudio);
         }
