@@ -1,4 +1,4 @@
-<div class="md-padding" layout="column">
+<div class="md-padding" layout="column" >
     <md-content layout-align="center center" layout="row" style="position: absolute; top: 5px; left: 10px; font-size:24px;">
         <h1 style="padding: 0 20px 0 20px; margin-top:0px;margin-bottom:10px;"> {{ timer.time | date:'mm:ss'}}</h1>
         <md-button ng-click="timerStart()" style="margin-top:0px; margin-bottom:0px;">
@@ -38,7 +38,7 @@
             <div class="container-fluid">
 
                 <div ng-repeat="hint in hints">
-                    <md-button class="md-raised" ng-click="playHint( hint.filename )" >Play: {{ hint.name }}</md-button>
+                    <md-button class="md-raised" ng-click="playHint( hint )" >Play: {{ hint.name }}</md-button>
                 </div>
                 
                 <!--/.nav-collapse -->
