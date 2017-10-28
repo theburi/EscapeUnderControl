@@ -26,7 +26,7 @@ angular.module('escape')
           // { filename: 'audio/pharaoh/Completed the game.wav', name: 'Completed the game', volume: 1, repeat: false},
           { filename: 'audio/pharaoh/Out of time.wav', name: 'Out of time', volume: 1, repeat: false},
           { filename: 'audio/pharaoh/Congratulations at the end.wav', name: 'Congratulations at the end', volume: 1, repeat: false},
-          { filename: 'audio/pharaoh/monster_growl.mp3', name: 'Monster Growl', volume: 1, repeat: false},
+          { filename: 'audio/pharaoh/monster_growl.mp3', name: 'Monster Growl', volume: .8, repeat: false},
           { filename: 'audio/pharaoh/human-heartbeat.mp3', name: 'Human Heartbeat', volume: 1, repeat: false}
         ]
           console.log('quest');
