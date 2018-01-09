@@ -15,9 +15,9 @@
 
 <body layout="column">
   <md-content layout="column">
-    <div layout="row" role="main" flex layout-align="center center">
-      <md-button ui-sref="jungle" class="md-raised md-primary">Jungle</md-button>
-      <md-button ui-sref="pharaoh" class="md-raised md-primary">Pharaoh</md-button>
+    <div layout="row" role="main" flex layout-align="center center" md-theme="{{ theme }}" md-theme-watch="true">
+      <md-button ui-sref="jungle" class="md-raised md-primary" ng-click=changeTheme('green')>Jungle</md-button>
+      <md-button ui-sref="pharaoh" class="md-raised md-primary" ng-click=changeTheme('amber')>Pharaoh</md-button>
     </div>
     <div layout-fill ui-view flex></div>
   </md-content>

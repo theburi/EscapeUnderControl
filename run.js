@@ -4,8 +4,10 @@ var express = require('express');
 
 var path = require('path');
 var bodyParser = require('body-parser');
-var app = express();
+var Storage = require('node-storage');
 
+var app = express();
+var store = new Storage('gamestatus.json');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -28,7 +30,26 @@ app.get('*', function (req, res, next) {
 
 });
 
+app.post('/game/:name/:state/:confidence', function (req, res) {
+  var state = req.params.state;
+  var gameName = req.params.name;
+  var confidence = req.params.confidence;
+
+  Storage.put(gameName, { gameName: confidence });
+  return res.status(200);
+});
+
+app.get('/game/:name/:state', function (req, res) {
+  var state = req.params.state;
+  var gameName = req.params.name;
+
+  var confidence = Storage.get(gameName.state)
+  
+  return res.json(confidence)
+});
+
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
-})
+});
+
 module.exports = app;
