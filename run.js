@@ -21,23 +21,23 @@ app.use('/audio', express.static(__dirname + '/audio'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 
-// app.post('/game/:name/:state/:confidence', function (req, res) {
-//   var state = req.params.state;
-//   var gameName = req.params.name;
-//   var confidence = req.params.confidence;
+app.post('/game/:name/:state/:confidence', function (req, res) {
+  var state = req.params.state;
+  var gameName = req.params.name;
+  var confidence = req.params.confidence;
 
-//   Storage.put(gameName, { gameName: confidence });
-//   return res.status(200);
-// });
+  Storage.put(gameName, { gameName: confidence });
+  return res.status(200);
+});
 
-// app.get('/game/:name/:state', function (req, res) {
-//   var state = req.params.state;
-//   var gameName = req.params.name;
+app.get('/game/:name/:state', function (req, res) {
+  var state = req.params.state;
+  var gameName = req.params.name;
 
-//   var confidence = Storage.get(gameName.state)
+  var confidence = Storage.get(gameName.state)
   
-//   return res.json(confidence)
-// });
+  return res.json(confidence)
+});
 
 /* GET home page. */
 app.get('*', function (req, res, next) {
