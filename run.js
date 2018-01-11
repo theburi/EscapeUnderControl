@@ -22,6 +22,7 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 
 app.post('/game/:name/:state/:confidence', function (req, res) {
+  console.log('POST')
   var state = req.params.state;
   var gameName = req.params.name;
   var confidence = req.params.confidence;
@@ -31,6 +32,7 @@ app.post('/game/:name/:state/:confidence', function (req, res) {
 });
 
 app.get('/game/:name/:state', function (req, res) {
+  console.log('GET')
   var state = req.params.state;
   var gameName = req.params.name;
 
