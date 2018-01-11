@@ -70,7 +70,8 @@ angular.module('escape')
           timeController.playHint = function (hintAudio) {
             console.log('Playing sound', hintAudio);
             if ($scope.audio) $scope.audio.stop();
-            $scope.audio = ngAudio.load(hintAudio);
+            $scope.audio = ngAudio.load(hintAudio.filename);
+            $scope.audio.volume = hintAudio.volume;
             $scope.audio.play();
             // ngAudio.play (hintAudio);
           }
@@ -84,7 +85,7 @@ angular.module('escape')
 
           var getData = function () {
             states.forEach(function (state) {
-              $http.get('http://192.168.1.6/jungle/' & state)
+              $http.get('http://192.168.1.6/game/jungle/' & state)
                 .then(function (res) {
                   $scope.GameStates.state = res.data.args;
                   errorCount = 0;
