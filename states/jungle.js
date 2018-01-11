@@ -77,7 +77,7 @@ angular.module('escape')
           }
 
 //room state logic 
-          var loadTime = 1000, //Load the data every second
+          var loadTime = 5000, //Load the data every second
             errorCount = 0, //Counter for the server errors
             loadPromise; //Pointer to the promise created by the Angular $timout service
           var states = ['jungleS1rihno', 'jungleS1monkey', 'jungleS1lion', 'jungleS1elephant']
