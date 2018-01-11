@@ -27,7 +27,7 @@ app.post('/game/:name/:state/:confidence', function (req, res) {
   var gameName = req.params.name;
   var confidence = req.params.confidence;
 
-  Storage.put(gameName, { gameName: confidence });
+  store.put(gameName, { gameName: confidence });
   return res.status(200);
 });
 
@@ -36,7 +36,7 @@ app.get('/game/:name/:state', function (req, res) {
   var state = req.params.state;
   var gameName = req.params.name;
 
-  var confidence = Storage.get(gameName.state)
+  var confidence = store.get(gameName.state)
   
   return res.json(confidence)
 });
