@@ -85,7 +85,7 @@ angular.module('escape')
 
           var getData = function () {
             states.forEach(function (state) {
-              $http.get('http://192.168.1.6/game/jungle/' & state)
+              $http.get('http://192.168.1.6/game/jungle/' && state)
                 .then(function (res) {
                   $scope.GameStates.state = res.data.args;
                   errorCount = 0;
