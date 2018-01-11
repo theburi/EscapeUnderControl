@@ -35,10 +35,10 @@ app.get('/game/:name/:state', function (req, res) {
   console.log('GET')
   var state = req.params.state;
   var gameName = req.params.name;
+  if (gameName)
+    if (gameName.state)
+      return res.json(store.get(gameName.state))
 
-  var confidence = store.get(gameName.state)
-  
-  return res.json(confidence)
 });
 
 /* GET home page. */
