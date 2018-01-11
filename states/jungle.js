@@ -94,7 +94,7 @@ angular.module('escape')
                   $scope.ErrorMessage = 'Server error';
                 });
             });              
-              nextLoad(loadPromise, url);
+              nextLoad();
           };
 
           var cancelNextLoad = function () {
