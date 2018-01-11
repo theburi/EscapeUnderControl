@@ -8,7 +8,7 @@ angular.module('escape')
     $stateProvider.state('jungle', {
       url: '/jungle',
       templateUrl: '/states/layout.html',
-      controller: ['$rootScope', '$scope', '$interval', 'ngAudio', '$timeout', '$http'
+      controller: ['$rootScope', '$scope', '$interval', 'ngAudio', '$timeout', '$http',
         function ($rootScope, $scope, $interval, ngAudio, $timeout, $http) {
 // Hints logic
           $scope.layout = 'Quest';
