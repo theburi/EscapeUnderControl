@@ -8,8 +8,8 @@ angular.module('escape')
     $stateProvider.state('jungle', {
       url: '/jungle',
       templateUrl: '/states/layout.html',
-      controller: ['$rootScope', '$scope', '$interval', 'ngAudio', '$timeout', '$http',
-        function ($rootScope, $scope, $interval, ngAudio, $timeout, $http) {
+      controller: ['$rootScope', '$scope', '$interval', 'ngAudio', '$http',
+        function ($rootScope, $scope, $interval, ngAudio, $http) {
 // Hints logic
           $scope.layout = 'Quest';
           $scope.puzzles = [];
@@ -79,8 +79,9 @@ angular.module('escape')
 //room state logic 
           var loadTime = 5000, //Load the data every second
             errorCount = 0, //Counter for the server errors
-            loadPromise; //Pointer to the promise created by the Angular $timout service
-          var states = ['jungleS1rihno', 'jungleS1monkey', 'jungleS1lion', 'jungleS1elephant']
+            loadPromise = $interval(getData, loadTime); //Pointer to the promise created by the Angular $interval service
+          var states = ['jungleS1rihno', 'jungleS1monkey', 'jungleS1lion', 'jungleS1elephant'];
+
           $scope.GameStates = {};
 
           var getData = function () {
@@ -89,23 +90,11 @@ angular.module('escape')
                 .then(function (res) {
                   $scope.GameStates.state = res.data.args;
                   errorCount = 0;
-                })
-                .catch(function (res) {
+                },
+                function (res) {
                   $scope.ErrorMessage = 'Server error';
                 });
-            });              
-              nextLoad();
-          };
-
-          var cancelNextLoad = function () {
-            $timeout.cancel(loadPromise);
-          };
-
-          var nextLoad = function (mill) {
-            mill = mill || loadTime;
-            //Always make sure the last timeout is cleared before starting a new one
-            cancelNextLoad();
-            loadPromise = $timeout(getData, mill);
+            });
           };
 
           //Start polling the data from the server
