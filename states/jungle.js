@@ -109,7 +109,7 @@ angular.module('escape')
           };
 
           //Start polling the data from the server
-          getData();
+          // getData();
 
           //Always clear the timeout when the view is destroyed, otherwise it will keep polling and leak memory
           $scope.$on('$destroy', function () {
