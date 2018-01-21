@@ -1,6 +1,9 @@
 
 //var myApp = angular.module('escape:main', [])
 
+var states = ["junglecaveset", "jungletablestart",  "jungles2", "jungleset", "jungles1rihno", "jungles1lion", "junglecavechest", "junglecavebox", "jungleend", "jungles1monkey", "junglelionclock"];
+var pharaohstates = ["pharaoheye", "pharaohmummy", "pharaohscarab", "pharaohlibra", "pharaohset","pharaohchest"]
+
 angular.module('escape')
 
   .config(['$stateProvider', function ($stateProvider, ngAudio) {
@@ -106,8 +109,7 @@ angular.module('escape')
                 });
             })
           }, loadTime); //Pointer to the promise created by the Angular $interval service
-          var states = ["junglecaveset", "jungletablestart",  "jungles2", "jungleset", "jungles1rihno", "jungles1lion", "junglecavechest", "junglecavebox", "jungleend", "jungles1monkey"];
-          var pharaohstates = ["pharaoheye", "pharaohmummy", "pharaohscarab", "pharaohlibra", "pharaohset","pharaohchest",]
+
           $scope.GameStates = [];
 
           //Start polling the data from the server
