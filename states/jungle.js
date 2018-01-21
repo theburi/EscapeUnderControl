@@ -91,12 +91,13 @@ angular.module('escape')
                 .then(function (res) {
                   if (res.data.value > 0) {
                     var found = false;
-                    $scope.GameStates.forEach(function (existingState) {
-                      if (existingState.state === state && existingState.value != res.data.value) {
-                        existingState.value = res.data.value;
+                    for (var i =0; i<$scope.GameStates.length; i++) {
+                      if ($scope.GameStates[0].state === state && $scope.GameStates[0].value != res.data.value) {
+                        $scope.GameStates[0].value = res.data.value;
                         found = true;
                       }
-                    })
+                    }
+
                     if (!found) {
                       if (res.data.value > 0.5)
                         $scope.GameStates.push({ 'state': state, 'value': res.data.value });
