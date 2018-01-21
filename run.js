@@ -1,3 +1,4 @@
+
 'use strict';
 
 var express = require('express');
@@ -22,23 +23,53 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 
 app.post('/game/:name/:state/:confidence', function (req, res) {
-  console.log('POST')
+
   var state = req.params.state;
   var gameName = req.params.name;
-  var confidence = req.params.confidence;
+  var confidence = parseFloat(req.params.confidence);
+  var oldvalue = parseFloat(store.get(state));
+  var newvalue = 0
+  if (confidence > 0) {
+    
+    if (oldvalue > 0) {
+      newvalue = (oldvalue * 10 + confidence) / 11;
+    }
+    else {
+      newvalue = confidence
+    }
 
-  store.put(gameName, { gameName: confidence });
-  return res.status(200);
+    store.put(state, newvalue)
+  }
+  res.status(200);
+  return res.end();
+});
+
+app.post('/game/:name', function (req, res) {
+  console.log('update all statuses')
+  var states = ["junglecaveset", "pharaoheye", "pharaohmummy", "jungletablestart", "pharaohchest", "jungles2", "jungleset", "pharaohscarab", "jungles1rihno", "jungles1lion", "pharaohlibra", "junglecavechest", "junglecavebox", "pharaohset", "jungleend"];
+  if (req.params.name === 'jungle')
+    states.forEach(function (state) {
+      store.remove(state)
+    })
+
+  return
 });
 
 app.get('/game/:name/:state', function (req, res) {
-  console.log('GET')
   var state = req.params.state;
   var gameName = req.params.name;
-  if (gameName)
-    if (gameName.state)
-      return res.json(store.get(gameName.state))
+  if (gameName) {
+    if (store.get(state)) {
+      res.json({ 'value': store.get(state) });
+    } else {
+      res.json({ 'value': 0 });
+    }
+  }
+  return
+});
 
+app.get('/game/:name', function (req, res) {
+  return
 });
 
 /* GET home page. */
@@ -47,7 +78,6 @@ app.get('*', function (req, res, next) {
   //res.status(200).sendFile(path.join(__dirname+'main.html')); 
   console.log(__dirname);
   res.sendFile(__dirname + '/main.html');
-
 
 });
 

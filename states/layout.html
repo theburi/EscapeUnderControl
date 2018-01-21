@@ -13,18 +13,13 @@
             <md-toolbar layout="row" class="md-hue-3">
                 <div class="md-toolbar-tools">
                     <span>Quest List</span>
-                    <div> {{ GameState.jungleS1rihno }}</div>
-                    <div> {{ GameState.jungleS1monkey }}</div>
-                    <div> {{ GameState.jungleS1lion }}</div>
-                    <div> {{ GameState.jungleS1elephant }}</div>
                 </div>
             </md-toolbar>
             <md-list class="md-dense" flex>
-                <md-list-item class="md-3-line" ng-repeat="puzzle in puzzles">
+                <md-list-item class="md-3-line" ng-repeat="state in GameStates">
                     <div class="md-list-item-text" layout="column">
-                        <h3>{{ puzzle.name }}</h3>
-                        <h4>{{ puzzle.description }}</h4>
-                        <h4>{{ puzzle.time }}</h4>
+                        <h2>{{ state.state }}</h2>
+                        <h4>{{ state.value }}</h4>
                         <md-checkbox class="md-secondary" ng-disabled="puzzle.status == 'COMPLETE'" aria-label="Puzzle Status"></md-checkbox>
                     </div>
                 </md-list-item>
