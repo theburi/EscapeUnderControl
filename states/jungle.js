@@ -13,6 +13,8 @@ angular.module('escape')
       templateUrl: '/states/layout.html',
       controller: ['$rootScope', '$scope', '$interval', 'ngAudio', '$http',
         function ($rootScope, $scope, $interval, ngAudio, $http) {
+          $scope.GameStates = {};
+          $scope.RoomSetUP = false;
           // Hints logic
           $scope.layout = 'Quest';
           $scope.puzzles = [];
@@ -44,7 +46,7 @@ angular.module('escape')
               timeController.timerProcess = $interval(TimerTick, timeController.timer.interval);
               // Reset the time to 0
               timeController.timerReset();
-
+              $scope.GameStates = [];
               $http.post('http://localhost:8080/game/jungle')
             }
           }
@@ -54,12 +56,14 @@ angular.module('escape')
             if (timeController.timerProcess) {
               $interval.cancel(timeController.timerProcess);
               timeController.timerProcess = null;
+              $scope.GameStates = [];
             }
           }
 
           timeController.timerReset = function () {
             timeController.timer.startTime = Date.now();
             timeController.timer.time = (new Date()).setHours(1, 0, 0, 0);
+            $scope.GameStates = [];
           }
 
           function TimerTick() {
@@ -81,29 +85,36 @@ angular.module('escape')
             // ngAudio.play (hintAudio);
           }
 
-          //room state logic 
-          var loadTime = 2000, //Load the data every second
-            errorCount = 0 //Counter for the server errors
+          // Room state logic 
+
+          $scope.ObjectKeys = function (obj) {
+            return Object.keys(obj);
+          }
+          $scope.ObjectExist = function (obj) {
+            return obj ? true: false;
+          }
+
+          var loadTime = 2000 //Load the data every second
           $scope.loadPromise = $interval(function () {
-            $scope.GameStates = [];
+
             states.forEach(function (state) {
               $http.get('http://localhost:8080/game/jungle/' + state)
                 .then(function (res) {
                   if (res.data.value > 0) {
-                    var found = false;
-                    for (var i =0; i<$scope.GameStates.length; i++) {
-                      if ($scope.GameStates[i].state === state && $scope.GameStates[i].value != res.data.value) {
-                        $scope.GameStates[i].value = res.data.value;
-                        found = true;
+                    if ($scope.GameStates[state]) {
+                      if ($scope.GameStates[state].value != res.data.value)
+                        $scope.GameStates[state].value = res.data.value;
+                    } else {
+                      
+                      if (res.data.value > 0.5) {
+                        $scope.GameStates[state] = { 'state': state, 'value': res.data.value };
                       }
                     }
-
-                    if (!found) {
-                      if (res.data.value > 0.5)
-                        $scope.GameStates.push({ 'state': state, 'value': res.data.value });
-                    }
                   }
-                  errorCount = 0;
+
+                  if ($scope.GameStates['jungleset'] && $scope.GameStates['junglecaveset'] && !isTimerRunning()) {
+                    $scope.RoomSetUP = true;
+                  }
                 },
                 function (res) {
                   $scope.ErrorMessage = 'Server error';
@@ -111,7 +122,7 @@ angular.module('escape')
             })
           }, loadTime); //Pointer to the promise created by the Angular $interval service
 
-          $scope.GameStates = [];
+
 
           //Start polling the data from the server
           // getData();

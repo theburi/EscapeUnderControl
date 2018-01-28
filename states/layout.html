@@ -16,10 +16,19 @@
                 </div>
             </md-toolbar>
             <md-list class="md-dense" flex>
-                <md-list-item class="md-3-line" ng-repeat="state in GameStates">
+                <md-list-item ng-show="{{ RoomSetUP === true }}">
+                    <h1>ROOM IS NOT READY</h1>
+                </md-list-item>
+                <md-list-item class="md-3-line">
+                    <h2>Table activated</h2>
+                    <md-checkbox class="md-secondary" ng-disabled="ObjectExist(GameStates['jungletablestart'])" aria-label="Puzzle Status"></md-checkbox>
+                </md-list-item>
+                
+                 <!-- "jungles2", "jungleset", "jungles1rihno", "jungles1lion", "junglecavechest", "junglecavebox", "jungleend", "jungles1monkey", "junglelionclock" -->
+                <md-list-item class="md-3-line" ng-repeat="key in ObjectKeys(GameStates)">
                     <div class="md-list-item-text" layout="column">
-                        <h2>{{ state.state }}</h2>
-                        <h4>{{ state.value }}</h4>
+                        <h2>{{ GameStates[key].state }}</h2>
+                        <h4>{{ GameStates[key].value }}</h4>
                         <md-checkbox class="md-secondary" ng-disabled="puzzle.status == 'COMPLETE'" aria-label="Puzzle Status"></md-checkbox>
                     </div>
                 </md-list-item>
