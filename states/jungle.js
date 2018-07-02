@@ -95,34 +95,6 @@ angular.module('escape')
           }
 
           var loadTime = 2000 //Load the data every second
-          $scope.loadPromise = $interval(function () {
-
-            states.forEach(function (state) {
-              $http.get('http://localhost:8080/game/jungle/' + state)
-                .then(function (res) {
-                  if (res.data.value > 0) {
-                    if ($scope.GameStates[state]) {
-                      if ($scope.GameStates[state].value != res.data.value)
-                        $scope.GameStates[state].value = res.data.value;
-                    } else {
-                      
-                      if (res.data.value > 0.5) {
-                        $scope.GameStates[state] = { 'state': state, 'value': res.data.value };
-                      }
-                    }
-                  }
-
-                  if ($scope.GameStates['jungleset'] && $scope.GameStates['junglecaveset'] && !isTimerRunning()) {
-                    $scope.RoomSetUP = true;
-                  }
-                },
-                function (res) {
-                  $scope.ErrorMessage = 'Server error';
-                });
-            })
-          }, loadTime); //Pointer to the promise created by the Angular $interval service
-
-
 
           //Start polling the data from the server
           // getData();
