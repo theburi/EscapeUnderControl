@@ -15,6 +15,7 @@
         "angular-ui-router": "latest",
         "body-parser": "latest",
         "express": "latest",
-        "node-storage": "latest"
+        "node-storage": "latest",
+        "modbus-serial": "^7.x.x"
     }
 }
