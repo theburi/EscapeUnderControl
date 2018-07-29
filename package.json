@@ -16,6 +16,6 @@
         "body-parser": "latest",
         "express": "latest",
         "node-storage": "latest",
-        "modbus-serial": "^7.x.x"
+        "modbus-serial": "https://github.com/theburi/node-modbus-serial.git"
     }
 }
