@@ -1,4 +1,5 @@
 
+'use strict';
 //var myApp = angular.module('escape:main', [])
 
 var states = ["junglecaveset", "jungletablestart",  "jungles2", "jungleset", "jungles1rihno", "jungles1lion", "junglecavechest", "junglecavebox", "jungleend", "jungles1monkey", "junglelionclock"];

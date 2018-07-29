@@ -1,4 +1,5 @@
 
+'use strict';
 //var myApp = angular.module('escape:main', [])
 
 angular.module('escape')
