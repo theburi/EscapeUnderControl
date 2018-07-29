@@ -66,13 +66,13 @@ app.listen(8080, function () {
 });
 
 // ModBus
-const ModbusRTU = require("modbus-serial");
-// create an empty modbus client
-const client = new ModbusRTU();
-// open connection to a serial port
-client.connectTTYBuffered("/dev/ttyS0", { baudRate: 9600 });
-// set timeout, if slave did not reply back
-client.setTimeout(500);
+// const ModbusRTU = require("modbus-serial");
+// // create an empty modbus client
+// const client = new ModbusRTU();
+// // open connection to a serial port
+// client.connectTTYBuffered("/dev/ttyS0", { baudRate: 9600 });
+// // set timeout, if slave did not reply back
+// client.setTimeout(500);
 
 
 module.exports = app;

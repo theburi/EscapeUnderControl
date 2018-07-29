@@ -6,20 +6,6 @@ angular.module('escape', [
   'ngMaterial',
   'ngAudio'
 ])
-.config(function ($mdThemingProvider) {
-  $mdThemingProvider.theme('green')
-    .primaryPalette('indigo')
-    .accentPalette('pink');
-
-  $mdThemingProvider.theme('amber')
-    .primaryPalette('lime')
-    .accentPalette('orange')
-    .warnPalette('blue');
-
-  // This is the absolutely vital part, without this, changes will not cascade down through the DOM.
-  $mdThemingProvider.alwaysWatchTheme(true);
-})
-
 
   .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
