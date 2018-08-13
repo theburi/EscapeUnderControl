@@ -17,6 +17,7 @@
         "express": "latest",
         "node-storage": "latest",
         "modbus-serial": "https://github.com/theburi/node-modbus-serial.git",
+        "moment": "latest",
         "onoff": "^3.2.1",
         "serialport": "^6.2.2"
     }

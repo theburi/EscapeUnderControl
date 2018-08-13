@@ -1,7 +1,9 @@
 <div class="md-padding" layout="column" >
     <md-content layout-align="center center" layout="row" style="position: absolute; top: 5px; left: 10px; font-size:24px;">
-        <h1 style="padding: 0 20px 0 20px; margin-top:0px;margin-bottom:10px;"> {{ timer.time | date:'mm:ss'}}</h1>
-        <md-button ng-click="timerStart()" style="margin-top:0px; margin-bottom:0px;">
+        <div ng-click="timerMinus()" style="cursor: pointer;"><md-icon>remove</md-icon></div>
+        <h1 style="padding: 0 10px 0 10px; margin-top:0px;margin-bottom:10px;"> {{ timer.time | date:'mm:ss'}}</h1>
+        <div ng-click="timerPlus()" style="cursor: pointer;"><md-icon>add</md-icon></div>
+        <md-button ng-click="timerStart()" style="margin: 0 10 0 10;">
             <md-icon>play_arrow</md-icon>
         </md-button>
         <md-button ng-click="timerStop()" style="margin-top:0px; margin-bottom:0px;">
@@ -9,35 +11,34 @@
         </md-button>
     </md-content>
     <md-content layout="row">
-        <md-content flex="40" md-whiteframe="1" class="md-padding">
+        <md-content flex="50" md-whiteframe="1" class="md-padding">
             <md-toolbar layout="row" class="md-hue-3">
                 <div class="md-toolbar-tools">
-                    <span>Quest List</span>
+                    <span flex>Puzzle Control</span>                    
+                    <md-progress-circular md-mode="indeterminate" ng-show="isLoading"></md-progress-circular>                    
+                    <md-button ng-click="showConfirm($event)">Reset</md-button>
+                    <md-button ng-click="loadQuest()" class="md-raised">Load</md-button>                    
                 </div>
             </md-toolbar>
             <md-list class="md-dense" >
-                <md-list-item ng-show="{{ RoomSetUP === true }}">
+                <md-list-item ng-show="{{ GameStates.length == 0 }}">
                     <h1>ROOM IS NOT READY</h1>
                 </md-list-item>
-                <md-list-item class="md-3-line">
-                    <h2>Table activated</h2>
-                    <md-checkbox class="md-secondary" ng-disabled="ObjectExist(GameStates['jungletablestart'])" aria-label="Puzzle Status"></md-checkbox>
-                </md-list-item>
                 
-                 <!-- "jungles2", "jungleset", "jungles1rihno", "jungles1lion", "junglecavechest", "junglecavebox", "jungleend", "jungles1monkey", "junglelionclock" -->
-                <md-list-item class="md-3-line" ng-repeat="key in ObjectKeys(GameStates)">
-                    <div class="md-list-item-text" layout="column">
-                        <h2>{{ GameStates[key].state }}</h2>
-                        <h4>{{ GameStates[key].value }}</h4>
-                        <md-checkbox class="md-secondary" ng-disabled="puzzle.status == 'COMPLETE'" aria-label="Puzzle Status"></md-checkbox>
+                <md-list-item class="md-3-line" ng-repeat="key in GameStates">
+                    <div class="md-list-item-text" layout="column"  ng-class="{ 'PuzzleActive': key.solved }">
+                        <h2 ng-class="{ 'PuzzleActive': key.solved }">{{ key.name }}</h2>
+                        <h4 ng-class="{ 'PuzzleActive': key.solved }">{{ key.lastState ? key.lastState : key.sound }}</h4>
+                        <md-checkbox class="md-secondary" ng-disabled="key.solved" aria-label="Puzzle Status" ng-model="key.solved" ng-change="activatePuzzle(key)" ></md-checkbox>
                     </div>
                 </md-list-item>
             </md-list>
         </md-content>
-        <md-content flex="60" md-whiteframe="2" class="md-padding">
+        <md-content flex="50" md-whiteframe="2" class="md-padding">
             <md-toolbar layout="row" class="md-hue-3">
                 <div class="md-toolbar-tools">
                     <span>AUDIO List</span>
+                    <div ng-hide="!isSoundPlaying" style="cursor: pointer;" ng-click="stopSound()"><md-icon>stop</md-icon></div>
                     <md-progress-linear md-mode="determinate" value="{{audio.progress*100}}"></md-progress-linear>                    
                 </div>
             </md-toolbar>
@@ -46,7 +47,7 @@
             <div class="container-fluid">
 
                 <div ng-repeat="hint in hints">
-                    <md-button class="md-raised" ng-click="playHint( hint )" >Play: {{ hint.name }}</md-button>
+                    <md-button class="md-raised" ng-click="playHint( hint )">Play: {{ hint.name }}</md-button>
                 </div>
                 
                 <!--/.nav-collapse -->
