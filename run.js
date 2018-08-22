@@ -128,8 +128,8 @@ var intervalHandle = function pollGameState() {
 function readPuzzleState(id) {
     try {
         // set ID of slave
-        await client.setID(id);
-        let val =  await client.readHoldingRegisters(0, 10);
+        client.setID(id);
+        let val =  client.readHoldingRegisters(0, 10);
         console.log("Registers ", val)
         // return the value
         return val.data[0];
