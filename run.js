@@ -15,7 +15,7 @@ var GameDeviceDef = [{ name: 'Pictures', id: 5, state: [0, 0, 0, 0, 0, 0, 0, 0, 
 var GameState = []; // [ {name: 'Puzzle 1', id: 1, lastState:[], newState: [], updated: '', solved: false }]
 
 // Load Game States
-for (var i = 0; i < GameState.length; i++) {
+for (var i = 0; i < GameDeviceDef.length; i++) {
   GameState.push({ name: GameDeviceDef[i].name, id: GameDeviceDef[i].id, lastState: GameDeviceDef[i].state, newState: GameDeviceDef[i].state, startStage: GameDeviceDef[i].startStage, endStage: GameDeviceDef[i].endStage, activeReg: GameDeviceDef[i].activeReg, solvedReg: GameDeviceDef[i].solvedReg, solved: false })
 }
 
@@ -127,6 +127,7 @@ var intervalHandle = function pollGameState() {
 
 function readPuzzleState(id) {
     // set ID of slave
+    console.log("Reading Register on ID ", id)
     client.setID(id);
     let val = client.readHoldingRegisters(0, 3)
       .then(function (data) {
