@@ -144,6 +144,6 @@ function writePuzzleState(id) {
   })
 }
 
-setInterval(intervalHandle, 2000);
+setInterval(intervalHandle, 5000);
 
 module.exports = app;
