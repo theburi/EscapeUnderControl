@@ -129,7 +129,7 @@ function readPuzzleState(id) {
   try {
     // set ID of slave
     client.setID(id);
-    let val = await client.readHoldingRegisters(0, 10)
+    let val = client.readHoldingRegisters(0, 10)
       .then(function (data) {
         console.log(data);
       });
