@@ -143,6 +143,6 @@ function writePuzzleState(id) {
   })
 }
 
-setTimeout(intervalHandle, 500);
+setInterval(intervalHandle, 2000);
 
 module.exports = app;
