@@ -139,7 +139,7 @@ function readPuzzleState(id) {
     }
 
 
-  });
+  
 }
 
 function writePuzzleState(id) {
