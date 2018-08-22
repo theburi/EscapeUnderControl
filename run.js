@@ -100,7 +100,7 @@ const ModbusRTU = require("modbus-serial");
 // create an empty modbus client
 const client = new ModbusRTU();
 // open connection to a serial port
-client.connectTTYBuffered("/dev/ttyUSB0", { baudRate: 19200 });
+client.connectRTU("/dev/ttyUSB0", { baudRate: 19200 });
 // set timeout, if slave did not reply back
 client.setTimeout(500);
 
@@ -126,14 +126,14 @@ var intervalHandle = function pollGameState() {
 }
 
 function readPuzzleState(id) {
-  client.readHoldingRegisters(0, 16, function (err, data) {
+  client.readHoldingRegisters(id, 0, function (err, data) {
     if (err) console.log("Error", err);
-    console.log(data.data);
+    console.log(data);
   });
 }
 
 function writePuzzleState(id) {
-  client.writeRegisters(0, GameState.puzzle, function (err, data) {
+  client.writeRegisters(id, 0, function (err, data) {
     if (err) console.log("Error", err);
   })
 }
