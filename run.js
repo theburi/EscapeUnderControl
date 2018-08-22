@@ -100,7 +100,7 @@ const ModbusRTU = require("modbus-serial");
 // create an empty modbus client
 const client = new ModbusRTU();
 // open connection to a serial port
-client.connectRTU("/dev/ttyUSB0", { baudRate: 19200 });
+client.connectRTU("/dev/ttyUSB0", { baudRate: 19200 }, write);
 // set timeout, if slave did not reply back
 client.setTimeout(500);
 
