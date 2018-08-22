@@ -127,15 +127,23 @@ var intervalHandle = function pollGameState() {
 
 function readPuzzleState(id) {
     // set ID of slave
-    console.log("Reading Register on ID ", id)
-    client.setID(id);
-    let val = client.readInputRegisters(0, 1)
+  console.log("Reading Register on ID ", id)
+  client.setID(id);
+  let val = client.readInputRegisters(0, 3)
+    .then(function (data) {
+      console.log("INPUT REGISTER ", data);
+      let val = client.readHoldingRegisters(0, 1)
       .then(function (data) {
-        console.log(data);
+        console.log("HOLDING REGISTER", data);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err);
       });
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+
 }
 
 function writePuzzleState(id) {
