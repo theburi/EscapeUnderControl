@@ -9,13 +9,16 @@ var Storage = require('node-storage');
 
 var app = express();
 var store = new Storage('gamestatus.json');
-var GameDeviceDef = [{ name: 'Puzzle 1', id: 1, state: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], startStage: 0, endStage: 1, activeReg: 0, solvedReg: 1 },
-{ name: 'Puzzle 2', id: 'sound', startStage: 0, endStage: 1, sound: '///', endTime: 50 },
-{ name: 'Puzzle 3', id: 2, state: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], startStage: 0, endStage: 1, activeReg: 0, solvedReg: 1 },
-{ name: 'Puzzle 4', id: 2, state: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], startStage: 1, endStage: 2, activeReg: 0, solvedReg: 1 },
-{ name: 'Puzzle 5', id: 2, state: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], startStage: 1, endStage: 2, activeReg: 0, solvedReg: 1 }];
+var GameDeviceDef = [{ name: 'Pictures', id: 5, state: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], startStage: 0, endStage: 1, activeReg: 0, solvedReg: 1 },
+{ name: 'Sound 1', id: 'sound', startStage: 0, endStage: 1, sound: 'audio/magic/sound1.pm3', endTime: 50 }];
 
 var GameState = []; // [ {name: 'Puzzle 1', id: 1, lastState:[], newState: [], updated: '', solved: false }]
+
+// Load Game States
+for (var i = 0; i < GameState.length; i++) {
+  GameState.push({ name: GameDeviceDef[i].name, id: GameDeviceDef[i].id, lastState: GameDeviceDef[i].state, newState: GameDeviceDef[i].state, startStage: GameDeviceDef[i].startStage, endStage: GameDeviceDef[i].endStage, activeReg: GameDeviceDef[i].activeReg, solvedReg: GameDeviceDef[i].solvedReg, solved: false })
+}
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,7 +29,7 @@ var GAME_NAME = '';
 var GAME_STATE = '';
 
 GameState = store.get('game');
-if (!GameState) GameState=[];
+if (!GameState) GameState = [];
 
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/states', express.static(__dirname + '/states'));
@@ -93,20 +96,23 @@ app.listen(8080, function () {
 });
 
 // ModBus
-// const ModbusRTU = require("modbus-serial");
-// // create an empty modbus client
-// const client = new ModbusRTU();
-// // open connection to a serial port
-// client.connectTTYBuffered("/dev/ttyS0", { baudRate: 9600 });
-// // set timeout, if slave did not reply back
-// client.setTimeout(500);
+const ModbusRTU = require("modbus-serial");
+// create an empty modbus client
+const client = new ModbusRTU();
+// open connection to a serial port
+client.connectTTYBuffered("/dev/ttyUSB0", { baudRate: 19200 });
+// set timeout, if slave did not reply back
+client.setTimeout(500);
 
 
 // Interval Function that calls ModBus
 
 var intervalHandle = function pollGameState() {
   //Check Game name and load game def file
-
+  for (var i = 0; i < GameState.length; i++) {
+    if (GameState[i].id != 'sound')
+      readPuzzleState(GameState[i].id);
+  }
   //Check ModBus works
 
   //Get ModBus data of each device.
