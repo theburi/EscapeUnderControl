@@ -102,7 +102,7 @@ const client = new ModbusRTU();
 // open connection to a serial port
 client.connectRTUBuffered("/dev/ttyUSB0", { baudRate: 9600 });
 // set timeout, if slave did not reply back
-client.setTimeout(2000);
+client.setTimeout(400);
 
 
 // Interval Function that calls ModBus
@@ -152,6 +152,6 @@ function writePuzzleState(id) {
   })
 }
 
-setInterval(intervalHandle, 5000);
+setInterval(intervalHandle, 500);
 
 module.exports = app;
