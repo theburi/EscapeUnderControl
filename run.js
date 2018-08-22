@@ -28,8 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 var GAME_NAME = '';
 var GAME_STATE = '';
 
-GameState = store.get('game');
-if (!GameState) GameState = [];
+// GameState = store.get('game');
+// if (!GameState) GameState = [];
 
 app.use('/assets', express.static(__dirname + '/assets'));
 app.use('/states', express.static(__dirname + '/states'));
