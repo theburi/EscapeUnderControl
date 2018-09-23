@@ -1,32 +1,24 @@
 
-'use strict';
+var bodyParser = require('body-parser');
 
 var express = require('express');
 
-var path = require('path');
-var bodyParser = require('body-parser');
-var Storage = require('node-storage');
-
 var app = express();
-var store = new Storage('gamestatus.json');
-var GameDeviceDef = [{ name: 'Pictures', id: 5, state: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], startStage: 0, endStage: 1, activeReg: 0, solvedReg: 1 },
-{ name: 'Sound 1', id: 'sound', startStage: 0, endStage: 1, sound: 'audio/magic/sound1.pm3', endTime: 50 }];
+var path = require('path');
 
-var GameState = []; // [ {name: 'Puzzle 1', id: 1, lastState:[], newState: [], updated: '', solved: false }]
+var gameApp = require('./app.js');
 
-// Load Game States
-for (var i = 0; i < GameDeviceDef.length; i++) {
-  GameState.push({ name: GameDeviceDef[i].name, id: GameDeviceDef[i].id, lastState: GameDeviceDef[i].state, newState: GameDeviceDef[i].state, startStage: GameDeviceDef[i].startStage, endStage: GameDeviceDef[i].endStage, activeReg: GameDeviceDef[i].activeReg, solvedReg: GameDeviceDef[i].solvedReg, solved: false })
-}
+global.GameDeviceDef = [];
 
+//State Variables
+global.GAME_NAME = '';
+global.GAME_STATE = '';
+
+gameApp.init();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
-//State Variables
-var GAME_NAME = '';
-var GAME_STATE = '';
 
 // GameState = store.get('game');
 // if (!GameState) GameState = [];
@@ -54,8 +46,6 @@ app.post('/game/:name', function (req, res) {
 
     GameState.push(state);
   }
-  store.put('game', GameState);
-  GAME_STATE = 'INIT';
   return res.send(GameState);
   //TODO push state to ModBus Devices
 });
@@ -92,66 +82,10 @@ app.get('*', function (req, res, next) {
 });
 
 app.listen(8080, function () {
-  console.log('Example app listening on port 8080!')
-});
-
-// ModBus
-const ModbusRTU = require("modbus-serial");
-// create an empty modbus client
-const client = new ModbusRTU();
-// open connection to a serial port
-client.connectRTUBuffered("/dev/ttyUSB0", { baudRate: 9600 });
-// set timeout, if slave did not reply back
-client.setTimeout(400);
+    console.log('Example app listening on port 8080!')
+  });
 
 
-// Interval Function that calls ModBus
+setInterval(gameApp.intervalHandle, 500);
 
-var intervalHandle = function pollGameState() {
-  //Check Game name and load game def file
-  for (var i = 0; i < GameState.length; i++) {
-    if (GameState[i].id != 'sound')
-      readPuzzleState(GameState[i].id);
-  }
-  //Check ModBus works
-
-  //Get ModBus data of each device.
-
-  //Push Admin commands to devices
-
-  //OR Calculate new state and push updated state for game flow
-
-  // Get updated state for changed devices and verify expected state.
-
-}
-
-function readPuzzleState(id) {
-    // set ID of slave
-  console.log("Reading Register on ID ", id)
-  client.setID(id);
-  let val = client.readInputRegisters(0, 3)
-    .then(function (data) {
-      console.log("INPUT REGISTER ", data);
-      let val = client.readHoldingRegisters(0, 1)
-      .then(function (data) {
-        console.log("HOLDING REGISTER", data);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-
-}
-
-function writePuzzleState(id) {
-  client.writeRegisters(id, 0, function (err, data) {
-    if (err) console.log("Error", err);
-  })
-}
-
-setInterval(intervalHandle, 500);
-
-module.exports = app;
+  

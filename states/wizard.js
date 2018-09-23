@@ -121,9 +121,10 @@ angular.module('escape')
               });
         }
 
-        $scope.activatePuzzle = function(item) {
-          console.log(item,' ', $scope.GameStates.indexOf(item)); 
-          item.solved= true;
+        $scope.activatePuzzle = function(puzzle, register) {
+          var p = $scope.GameStates[$scope.GameStates.indexOf(puzzle)];
+          console.log($scope.GameStates.indexOf(puzzle),' ', p.lastState.HR[p.lastState.HR.indexOf(register)]);
+          p.newState.HR[p.lastState.HR.indexOf(register)].value = 1;
         }
       }
 

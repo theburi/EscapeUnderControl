@@ -28,8 +28,8 @@
                 <md-list-item class="md-3-line" ng-repeat="key in GameStates">
                     <div class="md-list-item-text" layout="column"  ng-class="{ 'PuzzleActive': key.solved }">
                         <h2 ng-class="{ 'PuzzleActive': key.solved }">{{ key.name }}</h2>
-                        <h4 ng-class="{ 'PuzzleActive': key.solved }">{{ key.lastState ? key.lastState : key.sound }}</h4>
-                        <md-checkbox class="md-secondary" ng-disabled="key.solved" aria-label="Puzzle Status" ng-model="key.solved" ng-change="activatePuzzle(key)" ></md-checkbox>
+                        <h4 ng-class="{ 'PuzzleActive': key.solved }" style="overflow:hidden" ng-repeat="register in key.lastState.IR">{{ register }}</h4>
+                        <md-button class="md-secondary" ng-disabled="key.solved" aria-label="Puzzle Status" ng-repeat="register in key.lastState.HR"  ng-click="activatePuzzle(key, register)" >{{ register.name }} </md-button>
                     </div>
                 </md-list-item>
             </md-list>

@@ -1,0 +1,49 @@
+{
+    "wizard": [
+        {
+            "name": "Pictures",
+            "id": 5,
+            "state": {
+                "HR": [
+                    {
+                        "type": "HR",
+                        "startAddress": 0,
+                        "value": 0,
+                        "name": "Admin"
+                    }
+                ],
+                "IR": [
+                    {
+                        "type": "IR",
+                        "startAddress": 0,
+                        "value": 0,
+                        "name": "Pictures Found"
+                    },
+                    {
+                        "type": "IR",
+                        "startAddress": 1,
+                        "value": 0,
+                        "name": "Bit Pic"
+                    },
+                    {
+                        "type": "IR",
+                        "startAddress": 2,
+                        "value": 0,
+                        "name": "Solved"
+                    }
+                ]
+            },
+            "startStage": 0,
+            "endStage": 1,
+            "solvedReg": 0
+        },
+        {
+            "name": "Sound 1",
+            "id": "sound",
+            "startStage": 0,
+            "endStage": 1,
+            "sound": "audio/magic/sound1.pm3",
+            "endTime": 50
+        }
+    ]
+}
